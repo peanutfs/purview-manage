@@ -1,0 +1,7 @@
+# 应用名称
+spring:
+  application:
+    name: purview-manage
+# 端口号
+server:
+  port: 8089

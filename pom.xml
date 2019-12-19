@@ -10,7 +10,7 @@
     <!--工程说明-->
     <groupId>com.crossrainbow</groupId>
     <artifactId>purview-manage</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <!--继承说明：SpringBoot父工程-->
     <parent>
@@ -31,17 +31,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.crossrainbow</groupId>
+                <groupId>com.crossrainbow.pm</groupId>
                 <artifactId>pm-web</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.crossrainbow</groupId>
+                <groupId>com.crossrainbow.pm</groupId>
                 <artifactId>pm-server</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.crossrainbow</groupId>
+                <groupId>com.crossrainbow.pm</groupId>
                 <artifactId>pm-common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
