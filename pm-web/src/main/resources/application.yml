@@ -1,7 +1,7 @@
-# Ó¦ÓÃÃû³Æ
+# åº”ç”¨åç§°
 spring:
   application:
     name: purview-manage
-# ¶Ë¿ÚºÅ
+# ç«¯å£å·
 server:
   port: 8089

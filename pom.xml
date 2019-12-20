@@ -23,9 +23,23 @@
     <!-- 模块说明：声明多个子模块 -->
     <modules>
         <module>pm-common</module>
+        <module>pm-repository</module>
         <module>pm-server</module>
         <module>pm-web</module>
     </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <lombok.version>1.16.20</lombok.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+    </dependencies>
 
     <!--版本说明：统一管理依赖的版本号-->
     <dependencyManagement>
@@ -43,6 +57,11 @@
             <dependency>
                 <groupId>com.crossrainbow.pm</groupId>
                 <artifactId>pm-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.crossrainbow.pm</groupId>
+                <artifactId>pm-repository</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
