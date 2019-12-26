@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crossrainbow.pm.server.dao.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.domain.entity.User">
+        <id column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="USERNAME" property="username" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="USER_SALT" property="userSalt" jdbcType="VARCHAR"/>
+        <result column="USER_STATE" property="userState" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        USER_ID, USERNAME, ACCOUNT_NAME, PHONE_NO, ID_NO, PASSWORD, USER_SALT, USER_STATE, CREATE_TIME, UPDATE_TIME
+    </sql>
+
+    <!--根据用户名查询-->
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM USERS
+        WHERE USERNAME = #{username, jdbcType=VARCHAR}
+    </select>
+
+    <!--更新-->
+    <update id="update" parameterType="com.crossrainbow.pm.repository.entity.User">
+        UPDATE USERS
+        <set>
+            <if test="username != null">
+                USERNAME = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null">
+                ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNo != null">
+                PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <!--新增-->
+    <insert id="insert" parameterType="com.crossrainbow.pm.server.domain.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
+        insert into USERS (<include refid="Base_Column_List"/>)
+        values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
+        #{phoneNo, jdbcType=VARCHAR}, #{idNo, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR}, #{userSalt, jdbcType=VARCHAR},
+        #{userState, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}
+        <selectKey keyProperty="userId" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+</mapper>

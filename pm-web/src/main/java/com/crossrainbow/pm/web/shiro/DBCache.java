@@ -1,6 +1,7 @@
 package com.crossrainbow.pm.web.shiro;
 
-import com.crossrainbow.pm.server.entity.User;
+
+import com.crossrainbow.pm.server.domain.entity.User;
 
 import java.util.*;
 

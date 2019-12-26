@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crossrainbow.pm.server.dao.mapper.PrivilegeMapper">
+    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.domain.entity.Privilege">
+        <id column="PRIVILEGE_ID" property="privilegeId" jdbcType="BIGINT"/>
+        <result column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT"/>
+        <result column="PRIVILEGE_CODE" property="privilegeCode" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PRIVILEGE_ID, RESOURCE_ID, PRIVILEGE_CODE, CREATE_TIME, UPDATE_TIME
+    </sql>
+
+    <!--根据资源ID查询-->
+    <select id="selectByPrivilegeId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM PRIVILEGE
+        WHERE PRIVILEGE_ID = #{privilegeId, jdbcType=BIGINT}
+    </select>
+
+
+    <!--新增-->
+    <insert id="insert" parameterType="com.crossrainbow.pm.server.dao.dmo.PrivilegeDmo" useGeneratedKeys="true" keyProperty="privilegeId" keyColumn="PRIVILEGE_ID">
+        insert into PRIVILEGE (<include refid="Base_Column_List"/>)
+        values (#{privilegeId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT}, #{privilegeCode,jdbcType=VARCHAR},
+        #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}
+        <selectKey keyProperty="privilegeId" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+</mapper>

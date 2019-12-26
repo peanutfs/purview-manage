@@ -1,16 +1,16 @@
-package com.crossrainbow.pm.server.entity;
+package com.crossrainbow.pm.server.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @description:
  * @author:Peanutfs
- * @date:created in 12:00 2019/12/23
+ * @date:created in 19:10 2019/12/24
  */
 @Getter
 @Setter
@@ -33,11 +33,6 @@ public class User {
     private String accountName;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 手机号
      */
     private String phoneNo;
@@ -46,6 +41,21 @@ public class User {
      * 身份证号
      */
     private String idNo;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 用户密码盐
+     */
+    private String userSalt;
+
+    /**
+     * 用户状态
+     */
+    private int userState;
 
     /**
      * 创建时间
@@ -58,9 +68,14 @@ public class User {
     private Date updateTime;
 
     /**
-     * 角色集合
+     * 角色
      */
     private String roleName;
+
+    /**
+     * 角色集合
+     */
+    private List<Role> roleSet;
 
     /**
      * 用户是否锁定
@@ -74,4 +89,5 @@ public class User {
         this.roleName = roleName;
         this.isLocked = isLocked;
     }
+
 }

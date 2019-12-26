@@ -32,9 +32,17 @@
             <groupId>com.crossrainbow.pm</groupId>
             <artifactId>pm-common</artifactId>
         </dependency>
+        <!--mybatis依赖-->
         <dependency>
-            <groupId>com.crossrainbow.pm</groupId>
-            <artifactId>pm-repository</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!--mysql依赖-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

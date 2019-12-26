@@ -1,5 +1,7 @@
 package com.crossrainbow.pm.web.shiro;
 
+import com.jagregory.shiro.freemarker.ShiroTags;
+import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -10,7 +12,9 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -77,19 +81,34 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager defaultWebSecurityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/denied");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(loadShiroFilterChain());
+
+        shiroFilterFactoryBean.setLoginUrl("/login/login");
+        shiroFilterFactoryBean.setSuccessUrl("/login/index");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/denied");
+
         return shiroFilterFactoryBean;
     }
 
     private Map<String, String> loadShiroFilterChain() {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/resources/**", "anon");
-        filterChainDefinitionMap.put("/install", "anon");
-        filterChainDefinitionMap.put("/hello", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/layui/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         return filterChainDefinitionMap;
+    }
+
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer() throws IOException, TemplateException {
+        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+        freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates/ftl");
+        freemarker.template.Configuration configuration = freeMarkerConfigurer.createConfiguration();
+        configuration.setDefaultEncoding("UTF-8");
+        //这里可以添加其他共享变量 比如sso登录地址
+        configuration.setSharedVariable("shiro", new ShiroTags());
+        freeMarkerConfigurer.setConfiguration(configuration);
+        return freeMarkerConfigurer;
     }
 }

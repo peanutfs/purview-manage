@@ -23,7 +23,6 @@
     <!-- 模块说明：声明多个子模块 -->
     <modules>
         <module>pm-common</module>
-        <module>pm-repository</module>
         <module>pm-server</module>
         <module>pm-web</module>
     </modules>
@@ -57,11 +56,6 @@
             <dependency>
                 <groupId>com.crossrainbow.pm</groupId>
                 <artifactId>pm-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.crossrainbow.pm</groupId>
-                <artifactId>pm-repository</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
