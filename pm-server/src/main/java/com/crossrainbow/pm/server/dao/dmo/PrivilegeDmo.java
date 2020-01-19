@@ -1,6 +1,6 @@
 package com.crossrainbow.pm.server.dao.dmo;
 
-import com.crossrainbow.pm.server.domain.entity.Privilege;
+import com.crossrainbow.pm.server.service.entity.Privilege;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

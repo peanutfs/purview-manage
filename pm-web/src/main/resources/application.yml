@@ -26,4 +26,18 @@ spring:
 server:
   port: 8089
 
+mybatis-plus:
+  type-aliases-package: com.crossrainbow.pm.server.service.entity
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    id-type: 0 # 0:数据库自增id 1:用户输入id 2: 全局唯一id 3: 全局唯一uuid
+    field-strategy: 2 # 0: 忽略判断 1: 非null判断 2: 非空判断
+    db-column-underline: true
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+
+
 

@@ -98,13 +98,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.11</version>
-        </dependency>
-
-
     </dependencies>
 
     <!--环境配置-->

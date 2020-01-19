@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.crossrainbow.pm.server.dao.mapper.ResourceMapper">
-    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.domain.entity.Resource">
+    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.service.entity.Resource">
         <id column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT"/>
         <result column="PARENT_RESOURCE_ID" property="parentResourceId" jdbcType="BIGINT"/>
         <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR"/>
@@ -24,15 +24,15 @@
     </select>
 
 
-    <!--新增-->
-    <insert id="insert" parameterType="com.crossrainbow.pm.server.dao.dmo.PrivilegeDmo" useGeneratedKeys="true" keyProperty="resourceId" keyColumn="RESOURCE_ID">
-        insert into RESOURCES (<include refid="Base_Column_List"/>)
-        values (#{resourceId,jdbcType=BIGINT}, #{parentResourceId,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},
-        #{resourceCode,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR},
-        #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}
-        <selectKey keyProperty="resourceId" resultType="long" order="AFTER">
-            SELECT LAST_INSERT_ID();
-        </selectKey>
-    </insert>
+    <!--&lt;!&ndash;新增&ndash;&gt;-->
+    <!--<insert id="insert" parameterType="com.crossrainbow.pm.server.dao.dmo.PrivilegeDmo" useGeneratedKeys="true" keyProperty="resourceId" keyColumn="RESOURCE_ID">-->
+        <!--insert into RESOURCES (<include refid="Base_Column_List"/>)-->
+        <!--values (#{resourceId,jdbcType=BIGINT}, #{parentResourceId,jdbcType=BIGINT}, #{resourceName,jdbcType=VARCHAR},-->
+        <!--#{resourceCode,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR},-->
+        <!--#{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}-->
+        <!--<selectKey keyProperty="resourceId" resultType="long" order="AFTER">-->
+            <!--SELECT LAST_INSERT_ID();-->
+        <!--</selectKey>-->
+    <!--</insert>-->
 
 </mapper>

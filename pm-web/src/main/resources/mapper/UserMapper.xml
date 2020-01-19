@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crossrainbow.pm.server.dao.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.domain.entity.User">
+    <resultMap id="BaseResultMap" type="com.crossrainbow.pm.server.service.entity.User">
         <id column="USER_ID" property="userId" jdbcType="BIGINT"/>
         <result column="USERNAME" property="username" jdbcType="VARCHAR"/>
         <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
@@ -13,20 +13,77 @@
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <resultMap id="User_Role_Privilege_ResultMap" type="com.crossrainbow.pm.server.service.entity.User">
+        <id column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="USERNAME" property="username" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="USER_SALT" property="userSalt" jdbcType="VARCHAR"/>
+        <result column="USER_STATE" property="userState" jdbcType="VARCHAR"/>
+        <result column="USER_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="USER_UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <collection property="roleList" ofType="com.crossrainbow.pm.server.service.entity.Role">
+            <id column="ROLE_ID" property="roleId" jdbcType="BIGINT"/>
+            <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
+            <result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR"/>
+            <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR"/>
+            <result column="ROLE_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="ROLE_UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+            <collection property="privilegeList" ofType="com.crossrainbow.pm.server.service.entity.Privilege">
+                <id column="PRIVILEGE_ID" property="privilegeId" jdbcType="BIGINT"/>
+                <result column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT"/>
+                <result column="PRIVILEGE_CODE" property="privilegeCode" jdbcType="VARCHAR"/>
+                <result column="PRIVILEGE_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+                <result column="PRIVILEGE_UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+            </collection>
+        </collection>
+    </resultMap>
+
     <sql id="Base_Column_List">
         USER_ID, USERNAME, ACCOUNT_NAME, PHONE_NO, ID_NO, PASSWORD, USER_SALT, USER_STATE, CREATE_TIME, UPDATE_TIME
     </sql>
 
+    <sql id="User_Base_Column_List">
+        USER_ID, USERNAME, ACCOUNT_NAME, PHONE_NO, ID_NO, PASSWORD, USER_SALT, USER_STATE, CREATE_TIME AS USER_CREATE_TIME,
+        UPDATE_TIME AS USER_UPDATE_TIME
+    </sql>
+
+    <sql id="Role_Base_Column_List">
+        ROLE_ID, ROLE_NAME, ROLE_TYPE, ROLE_CODE, CREATE_TIME AS ROLE_CREATE_TIME, UPDATE_TIME AS ROLE_UPDATE_TIME
+    </sql>
+    
+    <sql id="Privilege_Base_Column_List">
+        PRIVILEGE_ID, RESOURCE_ID, PRIVILEGE_CODE, CREATE_TIME AS PRIVILEGE_CREATE_TIME, UPDATE_TIME AS PRIVILEGE_UPDATE_TIME
+    </sql>
+    
+    <sql id="User_Role_Privilege_Base_Column_List">
+        <include refid="User_Base_Column_List"/>
+        <include refid="Role_Base_Column_List"/>
+        <include refid="Privilege_Base_Column_List"/>
+    </sql>
+
     <!--根据用户名查询-->
-    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByUsername" resultMap="User_Role_Privilege_ResultMap" parameterType="java.lang.String">
         SELECT
-        <include refid="Base_Column_List"/>
-        FROM USERS
-        WHERE USERNAME = #{username, jdbcType=VARCHAR}
+        <include refid="User_Role_Privilege_Base_Column_List"/>
+        FROM USER u
+        LEFT JOIN USER_ROLE_RELATION urr
+        ON u.USER_ID = urr.urr_user_id
+        LEFT JOIN ROLE r
+        ON r.ROLE_ID = urr.urr_role_id
+        LEFT JOIN ROLE_PRIVILEGE_RELATION rpr
+        ON r.ROLE_ID = rpr.rpr_role_id
+        LEFT JOIN PRIVILEGE p
+        ON p.privilege_id = rpr.rpr_privilege_id
+        WHERE 1= 1
+        AND USERNAME = #{username, jdbcType=VARCHAR}
     </select>
 
     <!--更新-->
-    <update id="update" parameterType="com.crossrainbow.pm.repository.entity.User">
+    <update id="update" parameterType="com.crossrainbow.pm.server.service.entity.User">
         UPDATE USERS
         <set>
             <if test="username != null">
@@ -52,8 +109,8 @@
     </update>
 
     <!--新增-->
-    <insert id="insert" parameterType="com.crossrainbow.pm.server.domain.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
-        insert into USERS (<include refid="Base_Column_List"/>)
+    <insert id="insert" parameterType="com.crossrainbow.pm.server.service.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
+        insert into USER (<include refid="Base_Column_List"/>)
         values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
         #{phoneNo, jdbcType=VARCHAR}, #{idNo, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR}, #{userSalt, jdbcType=VARCHAR},
         #{userState, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends CommonController{
 
 
     @RequestMapping("/home")
