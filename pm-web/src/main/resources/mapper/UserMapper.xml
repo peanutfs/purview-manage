@@ -47,22 +47,22 @@
     </sql>
 
     <sql id="User_Base_Column_List">
-        USER_ID, USERNAME, ACCOUNT_NAME, PHONE_NO, ID_NO, PASSWORD, USER_SALT, USER_STATE, CREATE_TIME AS USER_CREATE_TIME,
-        UPDATE_TIME AS USER_UPDATE_TIME
+        USER_ID, USERNAME, ACCOUNT_NAME, PHONE_NO, ID_NO, PASSWORD, USER_SALT, USER_STATE, u.CREATE_TIME AS USER_CREATE_TIME,
+        u.UPDATE_TIME AS USER_UPDATE_TIME
     </sql>
 
     <sql id="Role_Base_Column_List">
-        ROLE_ID, ROLE_NAME, ROLE_TYPE, ROLE_CODE, CREATE_TIME AS ROLE_CREATE_TIME, UPDATE_TIME AS ROLE_UPDATE_TIME
+        ROLE_ID, ROLE_NAME, ROLE_TYPE, ROLE_CODE, r.CREATE_TIME AS ROLE_CREATE_TIME, r.UPDATE_TIME AS ROLE_UPDATE_TIME
     </sql>
     
     <sql id="Privilege_Base_Column_List">
-        PRIVILEGE_ID, RESOURCE_ID, PRIVILEGE_CODE, CREATE_TIME AS PRIVILEGE_CREATE_TIME, UPDATE_TIME AS PRIVILEGE_UPDATE_TIME
+        PRIVILEGE_ID, RESOURCE_ID, PRIVILEGE_CODE, p.CREATE_TIME AS PRIVILEGE_CREATE_TIME, p.UPDATE_TIME AS PRIVILEGE_UPDATE_TIME
     </sql>
     
     <sql id="User_Role_Privilege_Base_Column_List">
         <include refid="User_Base_Column_List"/>
-        <include refid="Role_Base_Column_List"/>
-        <include refid="Privilege_Base_Column_List"/>
+        , <include refid="Role_Base_Column_List"/>
+        , <include refid="Privilege_Base_Column_List"/>
     </sql>
 
     <!--根据用户名查询-->
@@ -108,15 +108,15 @@
         where USER_ID = #{userId,jdbcType=BIGINT}
     </update>
 
-    <!--新增-->
-    <insert id="insert" parameterType="com.crossrainbow.pm.server.service.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
-        insert into USER (<include refid="Base_Column_List"/>)
-        values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},
-        #{phoneNo, jdbcType=VARCHAR}, #{idNo, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR}, #{userSalt, jdbcType=VARCHAR},
-        #{userState, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}
-        <selectKey keyProperty="userId" resultType="long" order="AFTER">
-            SELECT LAST_INSERT_ID();
-        </selectKey>
-    </insert>
+    <!--&lt;!&ndash;新增&ndash;&gt;-->
+    <!--<insert id="insert" parameterType="com.crossrainbow.pm.server.service.entity.User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">-->
+        <!--insert into USER (<include refid="Base_Column_List"/>)-->
+        <!--values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR},-->
+        <!--#{phoneNo, jdbcType=VARCHAR}, #{idNo, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR}, #{userSalt, jdbcType=VARCHAR},-->
+        <!--#{userState, jdbcType=VARCHAR}, #{createTime, jdbcType=TIMESTAMP}, #{updateTime, jdbcType=TIMESTAMP}-->
+        <!--<selectKey keyProperty="userId" resultType="long" order="AFTER">-->
+            <!--SELECT LAST_INSERT_ID();-->
+        <!--</selectKey>-->
+    <!--</insert>-->
 
 </mapper>

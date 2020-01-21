@@ -65,6 +65,11 @@
             <version>${mysql.version}</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
     </dependencies>
 
     <!--版本说明：统一管理依赖的版本号-->

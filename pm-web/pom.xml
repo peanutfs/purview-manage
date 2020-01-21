@@ -166,18 +166,21 @@
                                 <resource>
                                     <directory>src/main/resources</directory>
                                     <!--先排除所有的配置文件-->
+                                    <filtering>true</filtering>
                                     <excludes>
                                         <exclude>bootstrap*.yml</exclude>
+                                        <exclude>static/layui/**</exclude>
                                     </excludes>
                                 </resource>
                                 <resource>
                                     <directory>src/main/resources</directory>
                                     <!--引入所需环境的配置文件-->
-                                    <filtering>true</filtering>
+                                    <filtering>false</filtering>
                                     <includes>
                                         <include>application.yml</include>
                                         <include>bootstrap.yml</include>
                                         <include>bootstrap-${spring.profiles.active}.yml</include>
+                                        <include>static/layui/**</include>
                                     </includes>
                                 </resource>
                             </resources>

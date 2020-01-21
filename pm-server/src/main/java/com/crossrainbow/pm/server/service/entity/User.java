@@ -89,6 +89,7 @@ public class User extends Model<User> {
     /**
      * 角色集合
      */
+    @TableField(exist = false)
     private List<Role> roleList;
 
 

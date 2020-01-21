@@ -64,6 +64,7 @@ public class Role extends Model<Role> {
     /**
      * 权限集合
      */
+    @TableField(exist = false)
     private List<Privilege> privilegeList;
 
     @Override

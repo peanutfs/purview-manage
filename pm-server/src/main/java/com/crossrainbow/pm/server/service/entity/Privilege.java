@@ -37,6 +37,18 @@ public class Privilege extends Model<Privilege> {
     private String privilegeCode;
 
     /**
+     * 权限名称
+     */
+    @TableField(value = "privilege_name")
+    private String privilegeName;
+
+    /**
+     * 资源ID
+     */
+    @TableField(value = "resource_id")
+    private Long resourceId;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
@@ -51,6 +63,7 @@ public class Privilege extends Model<Privilege> {
     /**
      * 权限资源
      */
+    @TableField(exist = false)
     private Resource resource;
 
     @Override

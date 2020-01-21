@@ -31,4 +31,18 @@ public class RoleServiceImplTest {
         iRoleService.insert(role);
     }
 
+    @Test
+    public void updateRole(){
+        Role role = iRoleService.selectById(2L);
+        role.setRoleType("O");
+        role.setRoleCode("Operator");
+        role.setRoleName("操作员");
+        iRoleService.updateById(role);
+    }
+
+    @Test
+    public void testRoleDelete(){
+        iRoleService.deleteById(2L);
+    }
+
 }

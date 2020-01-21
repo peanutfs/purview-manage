@@ -10,15 +10,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="${base}/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="${base}/css/public.css" media="all" />
+    <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
 </head>
 <body class="childrenBody">
 <blockquote class="layui-elem-quote layui-bg-green">
     <div id="nowTime"></div>
 </blockquote>
 
-<script type="text/javascript" src="${base}/layui/layui.js"></script>
-<script type="text/javascript" src="${base}/js/main.js"></script>
+<script type="text/javascript" src="${base}/static/layui/layui.js"></script>
+<script type="text/javascript" src="${base}/static/js/main.js"></script>
 </body>
 </html>

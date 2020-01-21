@@ -21,25 +21,25 @@
         WHERE ROLE_ID = #{roleId, jdbcType=VARCHAR}
     </select>
 
-    <!--更新-->
-    <update id="update" parameterType="com.crossrainbow.pm.server.service.entity.Role">
-        UPDATE ROLES
-        <set>
-            <if test="roleName != null">
-                ROLE_NAME = #{roleName,jdbcType=VARCHAR},
-            </if>
-            <if test="roleType != null">
-                ROLE_TYPE = #{roleType,jdbcType=VARCHAR},
-            </if>
-            <if test="ROLE_CODE != null">
-                PHONE_NO = #{roleCode,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where ROLE_ID = #{roleId,jdbcType=BIGINT}
-    </update>
+    <!--&lt;!&ndash;更新&ndash;&gt;-->
+    <!--<update id="update" parameterType="com.crossrainbow.pm.server.service.entity.Role">-->
+        <!--UPDATE ROLES-->
+        <!--<set>-->
+            <!--<if test="roleName != null">-->
+                <!--ROLE_NAME = #{roleName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="roleType != null">-->
+                <!--ROLE_TYPE = #{roleType,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="ROLE_CODE != null">-->
+                <!--PHONE_NO = #{roleCode,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateTime != null">-->
+                <!--UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where ROLE_ID = #{roleId,jdbcType=BIGINT}-->
+    <!--</update>-->
 
     <!--&lt;!&ndash;新增&ndash;&gt;-->
     <!--<insert id="insert" parameterType="com.peanut.fs.dao.model.user.UserInfoModel" useGeneratedKeys="true" keyProperty="roleId" keyColumn="ROLE_ID">-->

@@ -5,14 +5,14 @@
         <id column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT"/>
         <result column="PARENT_RESOURCE_ID" property="parentResourceId" jdbcType="BIGINT"/>
         <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR"/>
-        <result column="RESOURCE_CODE" property="resourceCode" jdbcType="VARCHAR"/>
         <result column="RESOURCE_TYPE" property="resourceType" jdbcType="VARCHAR"/>
         <result column="RESOURCE_URL" property="resourceUrl" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_PRIORITY" property="resourcePriority" jdbcType="INTEGER"/>
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        RESOURCE_ID, PARENT_RESOURCE_ID, RESOURCE_NAME, RESOURCE_CODE, RESOURCE_TYPE, RESOURCE_URL, CREATE_TIME, UPDATE_TIME
+        RESOURCE_ID, PARENT_RESOURCE_ID, RESOURCE_NAME, RESOURCE_TYPE, RESOURCE_URL, RESOURCE_PRIORITY, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!--根据资源ID查询-->

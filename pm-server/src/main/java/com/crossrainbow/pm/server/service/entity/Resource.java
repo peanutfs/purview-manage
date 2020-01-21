@@ -21,7 +21,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@TableName(value = "resources")
+@TableName(value = "resource")
 public class Resource extends Model<Resource> {
 
     /**
@@ -33,7 +33,7 @@ public class Resource extends Model<Resource> {
     /**
      * 父资源ID
      */
-    @TableField(value = "parent_resources_id")
+    @TableField(value = "parent_resource_id")
     private Long parentResourceId;
 
     /**
@@ -41,12 +41,6 @@ public class Resource extends Model<Resource> {
      */
     @TableField(value = "resource_name")
     private String resourceName;
-
-    /**
-     * 资源编码
-     */
-    @TableField(value = "resource_code")
-    private String resourceCode;
 
     /**
      * 资源类型
@@ -59,6 +53,12 @@ public class Resource extends Model<Resource> {
      */
     @TableField(value = "resource_url")
     private String resourceUrl;
+
+    /**
+     * 资源优先级
+     */
+    @TableField(value = "resource_priority")
+    private int resourcePriority;
 
     /**
      * 创建时间

@@ -55,3 +55,16 @@
 a:hover{
     text-decoration: underline;
 }
+
+.login_face{
+    margin:-55px auto 20px;
+    width:100px;
+    height:100px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    border:5px solid #fff;
+    overflow:hidden;
+    box-shadow:0 0 30px rgba(100, 0, 0, .5);
+}
+.login_face img{ width:100%;}

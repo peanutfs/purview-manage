@@ -1,6 +1,6 @@
 <#macro common title>
 <#assign base = request.contextPath />
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="renderer" content="webkit">
@@ -11,8 +11,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <title>${title}</title>
-    <link rel="stylesheet" href="${base}/layui/css/layui.css">
-    <script language="javascript" src="${base}/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="${base}/static/layui/css/layui.css">
+    <script language="javascript" src="${base}/static/layui/layui.js" charset="utf-8"></script>
 </head>
 
 <body>
